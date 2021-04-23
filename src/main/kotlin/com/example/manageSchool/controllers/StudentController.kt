@@ -1,5 +1,6 @@
 package com.example.manageSchool.controllers
 
+import com.example.manageSchool.DTOS.student.AddStudentToGroupDTO
 import com.example.manageSchool.DTOS.student.RegisterStudentDTO
 import com.example.manageSchool.services.StudentServiceImpl
 import org.springframework.beans.factory.annotation.Autowired
@@ -15,4 +16,7 @@ class StudentController(
 
     @PostMapping
     fun register(@RequestBody registerStudentDTO: RegisterStudentDTO) = studentService.register(registerStudentDTO)
+
+    @PatchMapping("/group")
+    fun addStudentsToGroup(@RequestBody addStudentToGroupDTO: AddStudentToGroupDTO) = studentService.addStudentsToGroup(addStudentToGroupDTO)
 }

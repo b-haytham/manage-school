@@ -1,6 +1,6 @@
 package com.example.manageSchool.models
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties
+import com.fasterxml.jackson.annotation.*
 import javax.persistence.*
 
 @Entity
@@ -15,5 +15,9 @@ data class Subject(
     @OneToOne(cascade = [CascadeType.REFRESH, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH])
     @JoinColumn(name = "teacher_id", referencedColumnName = "id")
     @JsonIgnoreProperties("subject")
-    var teacher: Teacher? = null
+    var teacher: Teacher? = null,
+
+    @ManyToMany(fetch = FetchType.EAGER ,cascade = [CascadeType.REFRESH, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH], mappedBy = "subjects")
+    @JsonIgnoreProperties("subjects", allowSetters = true)
+    val groups: MutableSet<Group>? = mutableSetOf<Group>()
 )

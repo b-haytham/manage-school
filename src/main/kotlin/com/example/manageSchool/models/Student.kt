@@ -1,5 +1,8 @@
 package com.example.manageSchool.models
 
+import com.fasterxml.jackson.annotation.JsonIgnore
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
+import com.fasterxml.jackson.annotation.JsonUnwrapped
 import javax.persistence.*
 
 @Entity
@@ -10,5 +13,14 @@ data class Student(
     var id: Long? = -1,
 
     @OneToOne(cascade = [CascadeType.ALL])
-    var user: User? = null
-)
+    @JsonIgnoreProperties("id")
+    @JsonUnwrapped
+    var user: User? = null,
+
+
+){
+    @ManyToOne(fetch = FetchType.EAGER ,cascade = [CascadeType.REFRESH, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH])
+    @JoinColumn(name = "group_id", referencedColumnName = "id")
+    @JsonIgnoreProperties("students")
+    var group: Group? = null
+}
