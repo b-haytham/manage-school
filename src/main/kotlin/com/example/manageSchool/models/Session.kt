@@ -26,6 +26,12 @@ data class Session(
 
     @ManyToOne(fetch = FetchType.EAGER ,cascade = [CascadeType.REFRESH, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH])
     @JoinColumn(name = "group_id", referencedColumnName = "id")
-    @JsonIgnoreProperties(value = ["subjects"], allowSetters = true)
-    var group: Group? = null
-)
+    @JsonIgnoreProperties(value = ["subjects", "students"], allowSetters = true)
+    var group: Group? = null,
+
+    @OneToMany(fetch = FetchType.LAZY ,cascade = [CascadeType.REFRESH, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH], mappedBy = "session")
+    @JsonIgnoreProperties("session", allowSetters = true)
+    var absences: MutableSet<Absence>? = mutableSetOf()
+){
+
+}

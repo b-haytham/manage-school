@@ -8,7 +8,11 @@ import java.util.*
 interface GroupService {
     fun findAll(): Iterable<Group>
 
+    fun findAllById(ids: Iterable<Long>): Iterable<Group>
+
     fun findById(id: Long): Optional<Group>
+
+    fun save(group: Group): Group
 
     fun create(createGroupDTO: CreateGroupDTO): Group
 

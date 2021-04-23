@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional
 import java.util.*
 
 @Service
+@Transactional
 class SubjectServiceImpl(
     private val subjectRepository: SubjectRepository,
     private val teacherService: TeacherServiceImpl,
@@ -22,7 +23,6 @@ class SubjectServiceImpl(
 
     override fun findById(id: Long): Optional<Subject> = subjectRepository.findById(id)
 
-    @Transactional
     override fun addSubjectsToGroup(addSubjectsToGroupsDTO: AddSubjectsToGroupsDTO): Iterable<Subject> {
         val group = groupService.findById(addSubjectsToGroupsDTO.groupId)
         if(group.isEmpty) throw Exception("Group Not Found")

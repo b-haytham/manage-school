@@ -1,13 +1,12 @@
 package com.example.manageSchool
 
 import com.example.manageSchool.models.*
-import com.example.manageSchool.repositories.StudentRepository
-import com.example.manageSchool.repositories.SubjectRepository
-import com.example.manageSchool.repositories.TeacherRepository
+import com.example.manageSchool.repositories.*
 import org.springframework.boot.CommandLineRunner
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 import org.springframework.stereotype.Component
+import java.util.*
 
 @SpringBootApplication
 class ManageSchoolApplication
@@ -16,7 +15,9 @@ class ManageSchoolApplication
 class MyRunnner(
 	private val studentRepository: StudentRepository,
 	private val teacherRepository: TeacherRepository,
-	private val subjectRepository: SubjectRepository
+	private val subjectRepository: SubjectRepository,
+	private val groupRepository: GroupRepository,
+	private val sessionRepository: SessionRepository
 ) : CommandLineRunner {
 
 	override fun run(vararg args: String?) {
@@ -28,9 +29,9 @@ class MyRunnner(
 		val teacher2 = Teacher(user = user2)
 		val teacher3 = Teacher(user = user3)
 
-		val user4 = User(firstName = "student 1", lasName = "student 1", email = "student 1", password = "student 1", role = UserRoles.TEACHER)
-		val user5 = User(firstName = "student 2", lasName = "student 2", email = "student 2", password = "student 2", role = UserRoles.TEACHER)
-		val user6 = User(firstName = "student 3", lasName = "student 3", email = "student 3", password = "student 3", role = UserRoles.TEACHER)
+		val user4 = User(firstName = "student 1", lasName = "student 1", email = "student 1", password = "student 1", role = UserRoles.STUDENT)
+		val user5 = User(firstName = "student 2", lasName = "student 2", email = "student 2", password = "student 2", role = UserRoles.STUDENT)
+		val user6 = User(firstName = "student 3", lasName = "student 3", email = "student 3", password = "student 3", role = UserRoles.STUDENT)
 
 		val student1 = Student(user = user4)
 		val student2 = Student(user = user5)
@@ -48,9 +49,16 @@ class MyRunnner(
 		val subject2 = Subject(name = "py", teacher = rteacher2)
 		val subject3 = Subject(name = "c", teacher = rteacher3)
 
-		subjectRepository.save(subject1)
+
+		val rsubject =  subjectRepository.save(subject1)
 		subjectRepository.save(subject2)
 		subjectRepository.save(subject3)
+
+		val group = Group(name = "Group 1", level = 1)
+		val rgroup = groupRepository.save(group)
+
+		val session = Session(date = Date(), startTime = "09:30", endTime = "10:30", group = rgroup, subject = rsubject)
+		sessionRepository.save(session)
 	}
 }
 

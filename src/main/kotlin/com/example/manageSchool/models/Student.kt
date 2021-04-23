@@ -17,10 +17,13 @@ data class Student(
     @JsonUnwrapped
     var user: User? = null,
 
+    @OneToMany(fetch = FetchType.LAZY, cascade = [CascadeType.REFRESH, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH], mappedBy = "student")
+    @JsonIgnoreProperties(value =["student", "session"], allowSetters = true)
+    var absences: MutableSet<Absence>? = mutableSetOf()
 
 ){
-    @ManyToOne(fetch = FetchType.EAGER ,cascade = [CascadeType.REFRESH, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH])
+    @ManyToOne(fetch = FetchType.LAZY ,cascade = [CascadeType.REFRESH, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH])
     @JoinColumn(name = "group_id", referencedColumnName = "id")
-    @JsonIgnoreProperties("students")
+    @JsonIgnoreProperties(value = ["students", "subjects"], allowSetters = true)
     var group: Group? = null
 }

@@ -14,13 +14,13 @@ data class Group(
 
     val level: Int? = null,
 
-    @OneToMany(fetch = FetchType.EAGER ,cascade = [CascadeType.REFRESH, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH], mappedBy = "group")
-    @JsonIgnoreProperties("group", allowSetters = true)
+    @OneToMany(fetch = FetchType.LAZY ,cascade = [CascadeType.REFRESH, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH], mappedBy = "group")
+    @JsonIgnoreProperties(value=["group", "absences"], allowSetters = true)
     val students: MutableSet<Student>? = mutableSetOf<Student>(),
 
 ) {
 
-    @ManyToMany(fetch = FetchType.EAGER ,cascade = [CascadeType.REFRESH, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH])
+    @ManyToMany(fetch = FetchType.LAZY ,cascade = [CascadeType.REFRESH, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH])
     @JoinTable(
         name = "group_subject",
         joinColumns = [JoinColumn(name = "group_id")],

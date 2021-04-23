@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional
 import java.util.*
 
 @Service
+@Transactional
 class StudentServiceImpl(
     private val studentRepository: StudentRepository,
     private val groupService: GroupServiceImpl
@@ -25,15 +26,22 @@ class StudentServiceImpl(
 
     override fun save(student: Student): Student = studentRepository.save(student)
 
+
     @Transactional
     override fun addStudentsToGroup(addStudentToGroupDTO: AddStudentToGroupDTO): Iterable<Student> {
-        val group = groupService.findById(addStudentToGroupDTO.groupId)
-        if(group.isEmpty) throw Exception("Group Not Found")
+        val g = groupService.findById(addStudentToGroupDTO.groupId)
+        if(g.isEmpty) throw Exception("Group Not Found")
         val students = this.findAllById(addStudentToGroupDTO.studentIds)
+
+        val group = g.get()
+
+        group.students?.addAll(students)
+        groupService.save(group)
         students.forEach {
-            it.group = group.get()
+            it.group = group
             this.save(it)
         }
+
         return students
     }
 

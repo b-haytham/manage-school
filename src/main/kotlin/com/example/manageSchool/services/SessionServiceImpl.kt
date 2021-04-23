@@ -4,10 +4,12 @@ import com.example.manageSchool.DTOS.session.CreateSessionDTO
 import com.example.manageSchool.models.Session
 import com.example.manageSchool.repositories.SessionRepository
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 
 import java.util.*
 
 @Service
+@Transactional
 class SessionServiceImpl(
     private val sessionRepository: SessionRepository,
     private val subjectService: SubjectServiceImpl,

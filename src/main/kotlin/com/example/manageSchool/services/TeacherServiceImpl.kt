@@ -6,9 +6,11 @@ import com.example.manageSchool.models.User
 import com.example.manageSchool.models.UserRoles
 import com.example.manageSchool.repositories.TeacherRepository
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 import java.util.*
 
 @Service
+@Transactional
 class TeacherServiceImpl(
     private val teacherRepository: TeacherRepository
 ): TeacherService {
