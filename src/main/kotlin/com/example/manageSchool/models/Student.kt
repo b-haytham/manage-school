@@ -26,4 +26,8 @@ data class Student(
     @JoinColumn(name = "group_id", referencedColumnName = "id")
     @JsonIgnoreProperties(value = ["students", "subjects"], allowSetters = true)
     var group: Group? = null
+
+    @OneToMany(fetch = FetchType.LAZY,cascade = [CascadeType.REFRESH, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH], mappedBy = "student")
+    @JsonIgnoreProperties(value = ["student"], allowSetters = true)
+    var grades: MutableSet<Grade>? = mutableSetOf()
 }

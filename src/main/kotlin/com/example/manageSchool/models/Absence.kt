@@ -22,6 +22,6 @@ data class Absence(
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = [CascadeType.REFRESH, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH])
     @JoinColumn(name = "student_id")
-    @JsonIgnoreProperties(value = ["absences", "group"], allowSetters = true)
+    @JsonIgnoreProperties(value = ["absences", "group", "grades"], allowSetters = true)
     var student: Student? = null
 }
