@@ -19,6 +19,8 @@ class GroupServiceImpl(
 
     override fun findAllById(ids: Iterable<Long>): Iterable<Group> = groupRepository.findAllById(ids)
 
+    override fun findByStudentsId(studentId: Long): Iterable<Group> = groupRepository.findByStudents_id(studentId)
+
     override fun findById(id: Long): Optional<Group> = groupRepository.findById(id)
 
     override fun save(group: Group): Group = groupRepository.save(group)

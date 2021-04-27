@@ -8,6 +8,8 @@ import java.util.*
 interface GroupService {
     fun findAll(): Iterable<Group>
 
+    fun findByStudentsId(studentId: Long): Iterable<Group>
+
     fun findAllById(ids: Iterable<Long>): Iterable<Group>
 
     fun findById(id: Long): Optional<Group>

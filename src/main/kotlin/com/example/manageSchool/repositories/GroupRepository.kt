@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface GroupRepository: CrudRepository<Group, Long> {
+
+    fun findByStudents_id(studentId: Long): Iterable<Group>
 }

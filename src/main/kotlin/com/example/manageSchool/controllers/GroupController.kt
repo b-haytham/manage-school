@@ -12,6 +12,9 @@ class GroupController(
     @GetMapping
     fun findAll() = groupService.findAll()
 
+    @GetMapping("/s")
+    fun findByStudentId(@RequestParam studentId: Long) = groupService.findByStudentsId(studentId)
+
     @PostMapping
     fun create(@RequestBody createGroupDTO: CreateGroupDTO) = groupService.create(createGroupDTO)
 
