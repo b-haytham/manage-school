@@ -12,8 +12,8 @@ import java.util.*
 @Service
 @Transactional
 class TeacherServiceImpl(
-    private val teacherRepository: TeacherRepository
-): TeacherService {
+        private val teacherRepository: TeacherRepository
+) : TeacherService {
 
     override fun findAll(): Iterable<Teacher> = teacherRepository.findAll()
 

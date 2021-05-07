@@ -12,6 +12,8 @@ interface SessionService {
 
     fun findAllById(ids: Iterable<Long>): Iterable<Session>
 
+    fun findByGroupIdAndSubjectId(groupId: Long, subjectId: Long): Iterable<Session>
+
     fun save(session: Session): Session
 
     fun create(createSessionDTO: CreateSessionDTO): Session

@@ -5,5 +5,6 @@ import org.springframework.data.repository.CrudRepository
 import org.springframework.stereotype.Repository
 
 @Repository
-interface AbsenceRepository: CrudRepository<Absence, Long> {
+interface AbsenceRepository : CrudRepository<Absence, Long> {
+    fun findByStudentIdAndSubjectId(studentId: Long, subjectId: Long): Iterable<Absence>
 }

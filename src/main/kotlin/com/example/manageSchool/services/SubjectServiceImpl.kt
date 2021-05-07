@@ -12,9 +12,9 @@ import java.util.*
 @Service
 @Transactional
 class SubjectServiceImpl(
-    private val subjectRepository: SubjectRepository,
-    private val teacherService: TeacherServiceImpl,
-    private val groupService: GroupServiceImpl
+        private val subjectRepository: SubjectRepository,
+        private val teacherService: TeacherServiceImpl,
+        private val groupService: GroupServiceImpl
 ) : SubjectService {
 
     override fun findAll(): Iterable<Subject> = subjectRepository.findAll()
@@ -25,7 +25,7 @@ class SubjectServiceImpl(
 
     override fun addSubjectsToGroup(addSubjectsToGroupsDTO: AddSubjectsToGroupsDTO): Iterable<Subject> {
         val group = groupService.findById(addSubjectsToGroupsDTO.groupId)
-        if(group.isEmpty) throw Exception("Group Not Found")
+        if (group.isEmpty) throw Exception("Group Not Found")
         val subjects = this.findAllById(addSubjectsToGroupsDTO.subjectIds)
 
         group.get().subjects.addAll(subjects)
@@ -38,13 +38,13 @@ class SubjectServiceImpl(
     }
 
     override fun create(createSubjectDTO: CreateSubjectDTO): Subject {
-        val teacher =  teacherService.findById(createSubjectDTO.teacherId)
+        val teacher = teacherService.findById(createSubjectDTO.teacherId)
         if (teacher.isEmpty) {
             throw Exception("Teacher Not Found")
         }
         val subject = Subject()
         subject.name = createSubjectDTO.name
         subject.teacher = teacher.get()
-        return  subjectRepository.save(subject)
+        return subjectRepository.save(subject)
     }
 }

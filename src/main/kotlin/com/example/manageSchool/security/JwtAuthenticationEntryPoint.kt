@@ -10,11 +10,11 @@ import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
 @Component
-class JwtAuthenticationEntryPoint: AuthenticationEntryPoint {
+class JwtAuthenticationEntryPoint : AuthenticationEntryPoint {
     override fun commence(
-        request: HttpServletRequest?,
-        response: HttpServletResponse?,
-        authException: AuthenticationException?
+            request: HttpServletRequest?,
+            response: HttpServletResponse?,
+            authException: AuthenticationException?
     ) {
         response!!.status = HttpServletResponse.SC_UNAUTHORIZED
         response.contentType = MediaType.APPLICATION_JSON_VALUE

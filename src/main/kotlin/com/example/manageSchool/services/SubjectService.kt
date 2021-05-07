@@ -11,7 +11,7 @@ interface SubjectService {
 
     fun findById(id: Long): Optional<Subject>
 
-    fun findAllById(ids: Iterable<Long>) : Iterable<Subject>
+    fun findAllById(ids: Iterable<Long>): Iterable<Subject>
 
     fun create(createSubjectDTO: CreateSubjectDTO): Subject
 

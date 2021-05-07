@@ -8,11 +8,11 @@ import java.util.*
 
 @Component
 class Runner(
-    private val studentRepository: StudentRepository,
-    private val teacherRepository: TeacherRepository,
-    private val subjectRepository: SubjectRepository,
-    private val groupRepository: GroupRepository,
-    private val sessionRepository: SessionRepository
+        private val studentRepository: StudentRepository,
+        private val teacherRepository: TeacherRepository,
+        private val subjectRepository: SubjectRepository,
+        private val groupRepository: GroupRepository,
+        private val sessionRepository: SessionRepository
 ) : CommandLineRunner {
 
     override fun run(vararg args: String?) {
@@ -45,7 +45,7 @@ class Runner(
         val subject3 = Subject(name = "c", teacher = rteacher3)
 
 
-        val rsubject =  subjectRepository.save(subject1)
+        val rsubject = subjectRepository.save(subject1)
         subjectRepository.save(subject2)
         subjectRepository.save(subject3)
 

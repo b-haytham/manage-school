@@ -8,13 +8,13 @@ import org.springframework.security.crypto.password.PasswordEncoder
 
 
 @SpringBootApplication
-class ManageSchoolApplication{
-	@Bean
-	fun passwordEncoder(): PasswordEncoder? {
-		return BCryptPasswordEncoder()
-	}
+class ManageSchoolApplication {
+    @Bean
+    fun passwordEncoder(): PasswordEncoder? {
+        return BCryptPasswordEncoder()
+    }
 }
 
 fun main(args: Array<String>) {
-	runApplication<ManageSchoolApplication>(*args)
+    runApplication<ManageSchoolApplication>(*args)
 }

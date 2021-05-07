@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*
 @RestController
 @RequestMapping("/api/grades")
 class GradeController(
-    private val gradeService: GradeServiceImpl
+        private val gradeService: GradeServiceImpl
 ) {
     @GetMapping
     fun findAll() = gradeService.findAll()

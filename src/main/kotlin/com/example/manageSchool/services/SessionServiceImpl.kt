@@ -11,10 +11,10 @@ import java.util.*
 @Service
 @Transactional
 class SessionServiceImpl(
-    private val sessionRepository: SessionRepository,
-    private val subjectService: SubjectServiceImpl,
-    private val groupService: GroupServiceImpl
-): SessionService {
+        private val sessionRepository: SessionRepository,
+        private val subjectService: SubjectServiceImpl,
+        private val groupService: GroupServiceImpl
+) : SessionService {
 
     override fun findAll(): Iterable<Session> = sessionRepository.findAll()
 
@@ -22,12 +22,14 @@ class SessionServiceImpl(
 
     override fun findById(id: Long): Optional<Session> = sessionRepository.findById(id)
 
+    override fun findByGroupIdAndSubjectId(groupId: Long, subjectId: Long): Iterable<Session> = sessionRepository.findByGroupIdAndSubjectId(groupId, subjectId)
+
     override fun save(session: Session): Session = sessionRepository.save(session)
 
     override fun create(createSessionDTO: CreateSessionDTO): Session {
         val group = groupService.findById(createSessionDTO.groupId)
         val subject = subjectService.findById(createSessionDTO.subjectId)
-        if( group.isEmpty || subject.isEmpty) throw Exception("Bad Request")
+        if (group.isEmpty || subject.isEmpty) throw Exception("Bad Request")
         val session = Session()
         session.date = createSessionDTO.date
         session.startTime = createSessionDTO.startTime

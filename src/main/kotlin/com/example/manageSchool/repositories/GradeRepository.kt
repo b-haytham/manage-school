@@ -5,5 +5,5 @@ import org.springframework.data.repository.CrudRepository
 import org.springframework.stereotype.Repository
 
 @Repository
-interface GradeRepository: CrudRepository<Grade, Long> {
+interface GradeRepository : CrudRepository<Grade, Long> {
 }

@@ -7,14 +7,14 @@ import org.springframework.web.bind.annotation.*
 @RestController
 @RequestMapping("/api/absences")
 class AbsenceController(
-    private val absenceService: AbsenceServiceImpl
+        private val absenceService: AbsenceServiceImpl
 ) {
 
     @GetMapping
     fun findAll() = absenceService.findAll()
 
     @GetMapping("/{absenceId}")
-    fun findById(@PathVariable("absenceId") absenceId: Long ) = absenceService.findById(absenceId)
+    fun findById(@PathVariable("absenceId") absenceId: Long) = absenceService.findById(absenceId)
 
     @PostMapping
     fun create(@RequestBody createAbsenceDTO: CreateAbsenceDTO) = absenceService.create(createAbsenceDTO)

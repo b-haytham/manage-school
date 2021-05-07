@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*
 @RestController
 @RequestMapping("/api/groups")
 class GroupController(
-    private val groupService: GroupServiceImpl
+        private val groupService: GroupServiceImpl
 ) {
     @GetMapping
     fun findAll() = groupService.findAll()

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*
 @RestController
 @RequestMapping("/api/teachers")
 class TeacherController(
-    private val teacherService: TeacherServiceImpl
+        private val teacherService: TeacherServiceImpl
 ) {
 
     @GetMapping

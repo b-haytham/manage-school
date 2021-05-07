@@ -12,12 +12,12 @@ import java.util.*
 
 @Service
 class JwtUtils(
-    @Value("\${jwt.secret}") private val jwtSecret: String,
-    @Value("\${jwt.expirationDateInMs}") private val jwtEpirationDate: Int
+        @Value("\${jwt.secret}") private val jwtSecret: String,
+        @Value("\${jwt.expirationDateInMs}") private val jwtEpirationDate: Int
 ) {
     fun generateToken(userDetails: UserDetails): String? {
         val claims = mutableMapOf<String, String>()
-        val roles =  userDetails.authorities
+        val roles = userDetails.authorities
         when {
             roles.contains(SimpleGrantedAuthority("ROLE_ADMIN")) -> {
                 claims["role"] = "ROLE_ADMIN"
@@ -30,18 +30,18 @@ class JwtUtils(
             }
         }
         return Jwts.builder()
-            .setClaims(claims as Map<String, Any>?)
-            .setSubject(userDetails.username)
-            .setIssuedAt(Date(System.currentTimeMillis()))
-            .setExpiration(Date(System.currentTimeMillis() + jwtEpirationDate))
-            .signWith(SignatureAlgorithm.HS512, jwtSecret).compact()
+                .setClaims(claims as Map<String, Any>?)
+                .setSubject(userDetails.username)
+                .setIssuedAt(Date(System.currentTimeMillis()))
+                .setExpiration(Date(System.currentTimeMillis() + jwtEpirationDate))
+                .signWith(SignatureAlgorithm.HS512, jwtSecret).compact()
     }
 
-    fun validateToken (token: String): Boolean {
+    fun validateToken(token: String): Boolean {
         try {
             val claims = Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token)
             return true
-        }catch (ex: Exception) {
+        } catch (ex: Exception) {
             throw  BadCredentialsException("Invalid Credentials")
         }
     }

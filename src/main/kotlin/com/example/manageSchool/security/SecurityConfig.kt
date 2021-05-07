@@ -15,7 +15,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 @EnableWebSecurity
-class SecurityConfig(private val userService: UserServiceImp, private val passwordEncoder: PasswordEncoder): WebSecurityConfigurerAdapter() {
+class SecurityConfig(private val userService: UserServiceImp, private val passwordEncoder: PasswordEncoder) : WebSecurityConfigurerAdapter() {
     @Autowired
     lateinit var jwtAuthFilter: JwtAuthFilter
 
@@ -24,25 +24,25 @@ class SecurityConfig(private val userService: UserServiceImp, private val passwo
 
     override fun configure(http: HttpSecurity?) {
         http!!.csrf().disable()
-            .authorizeRequests()
-            .antMatchers("/api/users/register",
-                "/api/users/login",
-                "/h2-console",
-                "/api/teachers/register",
-                "/api/students/register",
-                "/api/subjects/",
-                "/api/teachers/",
-                "/api/students/**",
-                "/api/users/",
-                "/api/groups/**",
-            ).permitAll()
-            .antMatchers( "/api/users/only-admin").hasAnyAuthority("ROLE_ADMIN")
-            .antMatchers("/api/users/only-prof").hasAnyAuthority("ROLE_PROF")
-            .anyRequest().permitAll()
-            .and()
-            .exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint)
-            .and()
-            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .authorizeRequests()
+                .antMatchers("/api/users/register",
+                        "/api/users/login",
+                        "/h2-console",
+                        "/api/teachers/register",
+                        "/api/students/register",
+                        "/api/subjects/",
+                        "/api/teachers/",
+                        "/api/students/**",
+                        "/api/users/",
+                        "/api/groups/**",
+                ).permitAll()
+                .antMatchers("/api/users/only-admin").hasAnyAuthority("ROLE_ADMIN")
+                .antMatchers("/api/users/only-prof").hasAnyAuthority("ROLE_PROF")
+                .anyRequest().permitAll()
+                .and()
+                .exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint)
+                .and()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 
         http.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter::class.java)
 

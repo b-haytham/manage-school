@@ -11,16 +11,16 @@ import java.util.*
 @Service
 @Transactional
 class GradeServiceImpl(
-    private val gradeRepository: GradeRepository,
-    private val studentService: StudentServiceImpl,
-    private val subjectService: SubjectServiceImpl
-): GradeService {
+        private val gradeRepository: GradeRepository,
+        private val studentService: StudentServiceImpl,
+        private val subjectService: SubjectServiceImpl
+) : GradeService {
 
     override fun findAll(): Iterable<Grade> = gradeRepository.findAll()
     override fun findAllById(ids: Iterable<Long>): Iterable<Grade> = gradeRepository.findAllById(ids)
     override fun findById(id: Long): Grade {
         val grade = gradeRepository.findById(id)
-        if(grade.isEmpty) throw Exception("Grade Not Found")
+        if (grade.isEmpty) throw Exception("Grade Not Found")
         return grade.get()
     }
 
@@ -35,7 +35,7 @@ class GradeServiceImpl(
     override fun create(createGradeDTO: CreateGradeDTO): Grade {
         val st = studentService.findById(createGradeDTO.studentId)
         val su = subjectService.findById(createGradeDTO.subjectId)
-        if(st.isEmpty || su.isEmpty) throw  Exception(">>>> Bad Request || ")
+        if (st.isEmpty || su.isEmpty) throw  Exception(">>>> Bad Request || ")
 
         val student = st.get()
         val subject = su.get()
@@ -44,6 +44,6 @@ class GradeServiceImpl(
         grade.student = student
         grade.subject = subject
 
-        return  gradeRepository.save(grade)
+        return gradeRepository.save(grade)
     }
 }

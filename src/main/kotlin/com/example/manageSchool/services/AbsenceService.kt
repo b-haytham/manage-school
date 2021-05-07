@@ -9,6 +9,9 @@ interface AbsenceService {
     fun findAll(): Iterable<Absence>
     fun findAllById(ids: Iterable<Long>): Iterable<Absence>
     fun findById(id: Long): Optional<Absence>
+
+    fun findByStudentIdAndSubjectId(studentId: Long, subjectId: Long): Iterable<Absence>
+
     fun save(absence: Absence): Absence
     fun create(createAbsenceDTO: CreateAbsenceDTO): Absence
 }

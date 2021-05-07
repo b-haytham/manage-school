@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*
 @RestController
 @RequestMapping("/api/subjects")
 class SubjectController(
-    private val subjectService: SubjectServiceImpl
+        private val subjectService: SubjectServiceImpl
 ) {
 
     @GetMapping

@@ -6,20 +6,20 @@ import javax.persistence.*
 @Entity
 @Table(name = "users")
 data class User(
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: Long? = -1,
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        var id: Long? = -1,
 
-    var firstName: String? = null,
+        var firstName: String? = null,
 
-    var lasName: String? = null,
+        var lasName: String? = null,
 
-    @Column(unique = true)
-    var email: String? = null,
+        @Column(unique = true)
+        var email: String? = null,
 
-    @JsonIgnore
-    var password: String? = null,
+        @JsonIgnore
+        var password: String? = null,
 
-    @Enumerated(value = EnumType.STRING)
-    var role: UserRoles? = null
+        @Enumerated(value = EnumType.STRING)
+        var role: UserRoles? = null
 )

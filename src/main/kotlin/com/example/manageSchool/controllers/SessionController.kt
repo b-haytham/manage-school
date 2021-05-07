@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*
 @RestController
 @RequestMapping("/api/sessions")
 class SessionController(
-    private val sessionService: SessionServiceImpl
+        private val sessionService: SessionServiceImpl
 ) {
     @GetMapping
     fun findAll() = sessionService.findAll()
